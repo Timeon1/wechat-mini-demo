@@ -1,0 +1,133 @@
+  var startY = 0;
+  var latest = 0;
+  var windowHeight = 0;
+  var topHeight = 0;
+  var status = 0; // 展开状态 0-未展开 1-向上展开 2-向下展开
+  var isX = false;
+  var bh = 82;
+
+  var start = function (e, ins) {
+    var touch = e.touches[0] || e.changedTouches[0];
+
+    latest = touch.pageY;
+    startY = touch.pageY;
+    windowHeight = e.target.dataset.height;
+    isX = e.target.dataset.isx;
+    topHeight = windowHeight - 400;
+
+    if (isX) bh = 116;
+  };
+
+  var move = function (e, ins) {
+    var _height = 0;
+    var touch   = e.touches[0] || e.changedTouches[0];
+    var pageY   = touch.pageY;
+
+    latest  = pageY;
+    _height = Math.abs(latest - startY);
+
+    // 向上
+    if (startY > pageY) {
+      if (status == 2) {
+        ins.selectComponent('.map-wrap').setStyle({
+          height: (windowHeight - Math.min(400, bh + _height)) + 'px',
+        });
+
+        ins.selectComponent('.scroll-box').setStyle({
+          height: Math.min(400, bh + _height) + 'px'
+        });
+      }else if (status == 0) {
+        ins.selectComponent('.scroll-box').setStyle({
+          height: Math.min(windowHeight, 400 + _height) + 'px',
+        });
+      }
+    }
+
+    // 向下
+    if (startY < pageY) {
+      if (status == 1) {
+        ins.selectComponent('.scroll-box').setStyle({
+          height: Math.max(400, windowHeight - _height) + 'px',
+        });
+      } else if (status == 0) {
+        ins.selectComponent('.map-wrap').setStyle({
+          height: Math.min(windowHeight-bh, windowHeight-400 + _height) + 'px',
+        });
+
+        ins.selectComponent('.scroll-box').setStyle({
+          height: Math.max(bh, 400 - _height) + 'px',
+        });
+      }
+    }
+  }
+
+  var end = function (e, ins) {
+    var _height = 0;
+    var touch   = e.touches[0] || e.changedTouches[0];
+    var pageY   = touch.pageY;
+
+    latest  = pageY;
+    _height = Math.abs(latest - startY);
+
+    // 向上
+    if (startY >= pageY) {
+      if (status == 0) {
+        if (topHeight * 0.2 < _height) {
+          ins.selectComponent('.scroll-box').setStyle({
+            height: windowHeight + 'px',
+            transition: 'height 0.5s ease'
+        });
+
+          status = 1;
+        } else {
+          ins.selectComponent('.scroll-box').setStyle({
+            height: '400px',
+            transition: 'height 0.5s ease'
+        });
+
+          status = 0;
+        }
+      } else if (status == 2) { // 底部向上
+        ins.selectComponent('.map-wrap').setStyle({
+          height: (windowHeight-400) + 'px',
+          transition: 'height 0.6s ease'
+        })
+
+        ins.selectComponent('.scroll-box').setStyle({
+          height: '400px',
+          transition: 'height 0.4s ease'
+        });
+
+        status = 0;
+      }
+    }
+
+    // 向下
+    if (startY < pageY) {
+      if (status == 1) {
+        ins.selectComponent('.scroll-box').setStyle({
+          height: '400px',
+          transition: 'height 0.5s ease'
+        });
+
+        status = 0;
+      } else if (status == 0) { // 初始位置向下
+        ins.selectComponent('.map-wrap').setStyle({
+          height: (windowHeight-bh) + 'px'
+        });
+
+        ins.selectComponent('.scroll-box').setStyle({
+          height: bh + 'px',
+          transition: 'height 0.5s ease'
+        });
+
+        status = 2;
+      }
+    }
+  };
+
+  module.exports = {
+    start: start,
+    move: move,
+    end: end
+  };

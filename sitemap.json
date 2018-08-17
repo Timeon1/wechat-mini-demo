@@ -1,0 +1,7 @@
+  {
+    "desc": "https://github.com/Timeon1/wechat-mini-demo",
+    "rules": [{
+    "action": "allow",
+    "page": "*"
+    }]
+  }

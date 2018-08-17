@@ -1,0 +1,57 @@
+/* pages/content/content.wxss */
+page {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100vh;
+}
+.wrap {
+  flex: 1; 
+  display: flex;
+  
+}
+.map-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 150rpx;
+  /* height: 200rpx; */
+}
+.map-wrap map {
+  width: 100%;
+  height: 100%;
+}
+
+.scroll-box {
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  height: 400px;
+  background-color: pink;
+}
+.scroll-header {
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: inherit;
+  background-color: #fff;
+  border-radius: 6rpx 6rpx 0 0;
+}
+.tag {
+  width: 60rpx;
+  height: 10rpx;
+  background-color: #ccc;
+  border-radius: 6rpx;
+}
+
+.scroll-list {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

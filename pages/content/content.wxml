@@ -1,0 +1,23 @@
+<wxs module="mapList" src="../../wxs/mapList.wxs"></wxs>
+<view class="wrap">
+  <view class="map-wrap" style="height: {{ windowHeight - 400 }}px">
+    <map 
+      id="dd-map"
+      scale="14" 
+      bindcallouttap="setStopOnAndOff"
+      bindmarkertap="reviewPoint" 
+      show-location
+    ></map>
+  </view>
+
+  <view class="scroll-box">
+    <view class="scroll-header" data-height="{{windowHeight}}" data-isx="{{isX}}" catchtouchstart="{{mapList.start}}" catchtouchmove="{{mapList.move}}" catchtouchend="{{mapList.end}}">
+      <view class="tag"></view>
+    </view>
+    <view class="scroll-list">
+      <text>列表</text>
+    </view>
+  
+  </view>
+
+</view>
