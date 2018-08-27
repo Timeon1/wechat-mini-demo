@@ -5,11 +5,11 @@
 
 
 
-![image](https://github.com/Timeon1/wechat-mini-demo/tree/master/imgs/image1)
+![](https://github.com/Timeon1/wechat-mini-demo/blob/master/imgs/image1.png)
 
-![image](https://github.com/Timeon1/wechat-mini-demo/tree/master/imgs/image2)
+![](https://github.com/Timeon1/wechat-mini-demo/blob/master/imgs/image2.png)
 
-![image](https://github.com/Timeon1/wechat-mini-demo/tree/master/imgs/image3)
+![](https://github.com/Timeon1/wechat-mini-demo/blob/master/imgs/image3.png)
 
 
 
